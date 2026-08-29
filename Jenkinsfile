@@ -11,8 +11,8 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
-                bat 'python -m pytest'
+                bat '"C:\\Users\\Naren\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install -r requirements.txt'
+                bat '"C:\\Users\\Naren\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pytest'
             }
         }
 
