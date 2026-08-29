@@ -43,7 +43,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t sonarqube-docker-app .'
+                bat '"C:\\Users\\Naren\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t sonarqube-docker-app .'
             }
         }
 
