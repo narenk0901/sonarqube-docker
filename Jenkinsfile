@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        sonarQube 'SonarQubeScanner'
-    }
-
     stages {
 
         stage('Checkout') {
@@ -15,20 +11,24 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                bat 'pip install -r requirements.txt'
-                bat 'pytest'
+                bat 'python -m pip install -r requirements.txt'
+                bat 'python -m pytest'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    bat '''
-                    sonar-scanner ^
-                    -Dsonar.projectKey=sonarqube-docker ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.host.url=http://localhost:9000
-                    '''
+                    script {
+                        def scannerHome = tool 'SonarQubeScanner'
+                        bat """
+                            "${scannerHome}\\bin\\sonar-scanner.bat" ^
+                            -Dsonar.projectKey=sonarqube-docker ^
+                            -Dsonar.projectName=sonarqube-docker ^
+                            -Dsonar.sources=. ^
+                            -Dsonar.exclusions=**/test_*.py
+                        """
+                    }
                 }
             }
         }
