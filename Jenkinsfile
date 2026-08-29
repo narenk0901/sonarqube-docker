@@ -49,8 +49,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat 'docker rm -f sonarqube-app || exit 0'
-                bat 'docker run -d --name sonarqube-app sonarqube-docker-app'
+                bat '"C:\\Users\\Naren\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" rm -f sonarqube-app || exit 0'
+                bat '"C:\\Users\\Naren\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d --name sonarqube-app sonarqube-docker-app'
             }
         }
     }
